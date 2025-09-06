@@ -1,1 +1,18 @@
-{ "status": true, "message": "successfully fetched all the levels data", "data": [{ "id": 101, "level_no": 1, "lessonName": "Basic Vocabulary" }, { "id": 102, "level_no": 2, "lessonName": "Everyday Words" }, { "id": 103, "level_no": 3, "lessonName": "Intermediate Vocabulary" }, { "id": 104, "level_no": 4, "lessonName": "Advanced Vocabulary" }, { "id": 105, "level_no": 5, "lessonName": "Complex Words" }, { "id": 106, "level_no": 6, "lessonName": "Mastering Vocabulary" }, { "id": 107, "level_no": 7, "lessonName": "Mastering Vocabulary" }] }
+const f = () => {
+    fetch("https://openapi.programming-hero.com/api/levels/all")
+    .then((x) => x.json())
+    .then((d) =>  display(d.data));
+}
+f();
+const display = (levels) => {
+    const level_container = document.getElementById("level-container");
+    level_container.innerHTML = ``;
+    levels.forEach(i => { 
+        console.log(i);
+        const btnDiv = document.createElement("div");
+        btnDiv.innerHTML = `
+        <button class="btn btn-outline btn-primary"><i class="fa-solid fa-graduation-cap"></i>Lesson ${i.level_no}</button>
+        `
+        level_container.appendChild(btnDiv);
+    });
+}
